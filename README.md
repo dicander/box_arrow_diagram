@@ -180,5 +180,6 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-[Ledning](created.png)
-[Facit](pacman.png)
+[Ledning](ledning.md)
+
+[Facit](facit.md)
