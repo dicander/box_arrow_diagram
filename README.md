@@ -34,6 +34,10 @@ typ kan skapas, läsas, förändras och kombineras med andra objekt av denna typ
 typens namn skrivs överst på varje utpekat objekt. Typen utelämnas alltid på
 variabelnamn, stackframes och på lådan med det globala scopet.
 
+### Datatypen list
+
+Datatypen list är oftast den första muterbara datatypen som ni möter i kursen. Muterbara datatyper innebär att själva objektet kan förändras oberoende av vad som pekar på den. Förändringsbarhet är bra i vissa lägen, till exempel när vi har en lista med nästan en miljon element och vill lägga till ett extra. Då vore det besvärligt att behöva skapa en ny enorm lista. Tyvärr ger det också upphov till några andra, mer förvirrande situationer som vi täcker härnäst.
+
 ## Aliasing
 
 Program behöver hög prestanda och de behöver vara begripliga så att de är lätta att förstå och felsöka. Python låter ibland bli att kopiera objekt där programmerare skulle förvänta sig en kopia. Det gäller även
@@ -97,6 +101,25 @@ after []
 $
 ```
 
+### Tentatal från 2018
+
+Vad skriver följande Python3-program ut?
+```
+def mystery(v, n):
+    n = n + 1
+    v[1] = n
+
+
+def main():
+    v = [1, 2]
+    n = 4
+    mystery(v, n)
+    print(v, n)
+
+
+main()
+```
+
 Ett annat namn för aliasing är sharing.
 
 ## Referensräkning
@@ -104,3 +127,56 @@ Ett annat namn för aliasing är sharing.
 Varje objekt i Python har en referensräkning som anger hur många andra lådor
 i diagrammet som pekar på det. Referensräkningen används för att avgöra
 när ett objekt inte behövs i minnet längre. Vi gör referensräkning genom att skriva ett tal nere i högra hörnet på varje objekt som ligger utanför stacken.
+
+## Exempel på tentatal
+(1p) Rita en minnesbild med låd- och pildiagram för programmet nedan då det når denkommenterade raden.
+```
+left = 1000
+right = left
+# Den kommenterade raden
+```
+
+(2p) Inspirerat av ett tentatal: Rita låd- och pil-diagram för hur det kan se ut i minnet då programmet når sista raden i main-funktionen.
+```
+class Node:
+    def __init__(self, value, following):
+        self.value = value
+        self.following = following
+
+
+def print_values(first):
+    temp = first
+    while temp:
+        print(temp.value)
+        temp = temp.following
+
+
+def create_list(size):
+    first = Node(size, None)
+    for i in range(size-1, 0, -1):
+        first = Node(i, first)
+    return first
+
+
+def destroy_element(first, index):
+    """returns the first element where index has been destroyed"""
+    if index == 0:
+        return first.following
+    answer = first #we will change this variable
+    for i in range(index-1):
+        first = first.following
+    following_following = first.following.following
+    first.following = following_following
+    return answer
+
+
+def main():
+    first = create_list(4)
+    print_values(first)
+    first = destroy_element(first, 2)
+    print_values(first)
+
+
+if __name__ == '__main__':
+    main()
+```
