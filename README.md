@@ -129,14 +129,14 @@ i diagrammet som pekar på det. Referensräkningen används för att avgöra
 när ett objekt inte behövs i minnet längre. Vi gör referensräkning genom att skriva ett tal nere i högra hörnet på varje objekt som ligger utanför stacken.
 
 ## Exempel på tentatal
-(1p) Rita en minnesbild med låd- och pildiagram för programmet nedan då det når denkommenterade raden.
+Rita en minnesbild med låd- och pildiagram för programmet nedan då det når denkommenterade raden.
 ```
 left = 1000
 right = left
 # Den kommenterade raden
 ```
 
-(2p) Inspirerat av ett tentatal: Rita låd- och pil-diagram för hur det kan se ut i minnet då programmet når sista raden i main-funktionen.
+Inspirerat av ett tentatal: Rita låd- och pil-diagram för hur det kan se ut i minnet då programmet når sista raden i main-funktionen.
 ```
 class Node:
     def __init__(self, value, following):
@@ -180,3 +180,5 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+[Ledning](created.png)
+[Facit](pacman.png)
