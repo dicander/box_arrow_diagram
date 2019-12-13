@@ -69,7 +69,42 @@ variabelnamn, stackframes och på lådan med det globala scopet.
 
 ### Datatypen list
 
-Datatypen list är oftast den första muterbara datatypen som ni möter i kursen. Muterbara datatyper innebär att själva objektet kan förändras oberoende av vad som pekar på den. Förändringsbarhet är bra i vissa lägen, till exempel när vi har en lista med nästan en miljon element och vill lägga till ett extra. Då vore det besvärligt att behöva skapa en ny enorm lista. Tyvärr ger det också upphov till några andra, mer förvirrande situationer som vi täcker härnäst.
+Datatypen list är oftast den första muterbara datatypen som ni möter i kursen. Muterbara datatyper innebär att själva objektet kan förändras oberoende av vad som pekar på den. Förändringsbarhet är bra i vissa lägen, till exempel när vi har en lista med nästan en miljon element och vill lägga till ett extra. Då vore det besvärligt att behöva skapa en ny enorm lista. Tyvärr ger det också upphov till några andra, mer förvirrande situationer som vi täcker nedan.
+
+När vi adderar två listor med varandra så skapas en ny lista. Den nya listan pekar ut samma objekt som de gamla listorna pekade ut. Den nya listan (v3 i exemplet nedan) är alltså en grund kopia.
+```Python
+>>> v1 = [1, 2]
+>>> v2 = [3, 4, 5]
+>>> v3 = v1 + v2
+>>> v1, v2, v3
+([1, 2], [3, 4, 5], [1, 2, 3, 4, 5])
+>>>
+```
+![Addition av listor](listaddition.png)
+
+
+När vi slice:ar en lista
+```Python
+>>> v1 = [1, 2, 3, 4]
+>>> v2 = v1[:2]
+>>> v1, v2
+([1, 2, 3, 4], [1, 2])
+>>>
+```
+så skapas en grund kopia av (delar av) listan. Den nya listan v2 pekar på samma objekt som den gamla listan. Detta gäller även när hela listan kopieras.
+
+[Slicead lista](sliced1.png)
+
+```Python
+>>> v1 = [1, 2]
+>>> v2 = v1[:]
+>>> v1, v2
+([1, 2], [1, 2])
+>>> v2[1] = 3
+>>> v1, v2
+([1, 2], [1, 3])
+>>>
+```
 
 ## Aliasing
 
