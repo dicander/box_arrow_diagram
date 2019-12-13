@@ -46,6 +46,6 @@ I har en annan historia. Varje gång som i har förändrats så har det varit et
 
 ![I slutet av main](s3.png)
 
-När vi slutligen lämnar main så finns det ingenting kvar som pekar på listan. Dess referensräkning når 0 och garbage collectorn kommer och tar den.
+När vi slutligen lämnar main så finns det ingenting kvar som pekar på listan. Dess referensräkning når 0 och skräpsamlaren (the garbage collector) kommer och tar den.
 
 ![Efter att vi lämnat main](s4.png)
