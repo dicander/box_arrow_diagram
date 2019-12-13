@@ -59,6 +59,27 @@ if __name__ == '__main__':
 ```
 [Facit](stackfacit.md)
 
+Om du anropar en metod på en klass så läggs metodanropet på stacken, precis som med funktioner. Self pekar på objektet vars metod har anropats. Exempelkod följer. Rita ett diagram då programmet når den kommenterade raden.
+```
+class A:
+    def __init__(self):
+        self.count = 0
+
+    def inc(self):
+        self.count += 1
+        # Diagram här innan vi återvänder
+
+
+def main():
+    a = A()
+    a.inc()
+
+
+if __name__ == '__main__':
+    main()
+```
+[Facit](objektfacit.md)
+
 
 ## Datatyper
 
@@ -93,7 +114,7 @@ När vi slice:ar en lista
 ```
 så skapas en grund kopia av (delar av) listan. Den nya listan v2 pekar på samma objekt som den gamla listan. Detta gäller även när hela listan kopieras.
 
-[Slicead lista](sliced1.png)
+![Slicead lista](sliced1.png)
 
 ```Python
 >>> v1 = [1, 2]
