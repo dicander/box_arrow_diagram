@@ -25,7 +25,40 @@ När det procedurella paradigmet föddes så förde det med sig idén om ett lok
 variabler. Varje gång en funktion anropas så skapas en ny låda som kallas
 en stackframe. Stackframen är scope för alla parameternamn och lokala variabelnamn. För att skilja dessa lokala scope åt så märker man dem med funktionsanropets plats i koden. Det lokala scopet innehåller parameternamn och namn på lokala variabler som är bundna till värden i datorns minne.
 
-Observera att det är ett lokalt scope per anrop och inte per funktion.
+Observera att det är en stackframe per anrop och inte per funktion.
+
+Om det utförs ett funktionsanrop inifrån ett funktionsanrop så staplas alla
+stackframes ovanpå varandra i en stack (ordet stack används nu i sin engelska
+betydelse som är "stapel".)
+
+Exempelkod:
+Rita låd- och pildiagram när körningen når den sista printsatsen i varje funktion. Rita också ett diagram då vi har lämnat main på slutet.
+```python
+def f(v, i):
+    v.append(1)
+    i += 2
+    print("f", locals())
+
+
+def g(v, i):
+    v.append(2)
+    i += 3
+    f(v, i)
+    print("g",locals())
+
+
+def main():
+    v = []
+    i = 0
+    g(v, i)
+    print("main", locals())
+
+
+if __name__ == '__main__':
+    main()
+```
+[Facit](stackfacit.md)
+
 
 ## Datatyper
 
