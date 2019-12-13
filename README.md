@@ -127,6 +127,8 @@ så skapas en grund kopia av (delar av) listan. Den nya listan v2 pekar på samm
 >>>
 ```
 
+Fler exempel finns på [Pythons hemsida](https://docs.python.org/3/tutorial/datastructures.html).
+
 ## Aliasing
 
 Program behöver hög prestanda och de behöver vara begripliga så att de är lätta att förstå och felsöka. Python låter ibland bli att kopiera objekt där programmerare skulle förvänta sig en kopia. Det gäller även
