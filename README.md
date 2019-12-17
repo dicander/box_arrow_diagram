@@ -277,5 +277,6 @@ if __name__ == '__main__':
 1. Fler exempel finns i [exempeltentan](https://github.com/dicander/training_exam).
 2. Den [första tentan på det nya formatet](https://gits-15.sys.kth.se/dicander/gruprog_tenta_2019-10-18)
 har ännu fler exempel.
-3. [Fx-kompletteringen](https://gits-15.sys.kth.se/dicander/Fxkomplettering20191202) har fler exempel. 
-4. Theo Ingelstam har förberett [övningar med facit här](https://github.com/Theo-Ing/public-work/tree/master/BoxAndArrowDiagrams).
+3. [Fx-kompletteringen](https://gits-15.sys.kth.se/dicander/Fxkomplettering20191202) har fler exempel.
+4. [Omtentan](https://gits-15.sys.kth.se/dicander/gruprogtenta2019-12-17) med facit.
+5. Theo Ingelstam har förberett [övningar med facit här](https://github.com/Theo-Ing/public-work/tree/master/BoxAndArrowDiagrams).
