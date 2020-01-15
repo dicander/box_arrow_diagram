@@ -253,8 +253,11 @@ def main():
 
 main()
 ```
+Tillägg från tentan: Rita ett låd- och pildiagram för hur det ser ut innan mystery returnerar.
+[Facit](tentatal2018.md)
 
 Ett annat namn för aliasing är sharing.
+
 
 ## Referensräkning
 
