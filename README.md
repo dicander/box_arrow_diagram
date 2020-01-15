@@ -2,14 +2,14 @@
 
 Syftet med ett låd- och pildiagram är att förstå kopplingen mellan variablers
 namn, typer och värden i datorns minne. Mer specifikt handlar det om de variabler som du skapar själv under programmets gång och deras resa genom funktioner och
-metoder som du har skrivit själv. Vi delar in digagrammet i 3 delar som alla får varsitt stycke.
+metoder som du har skrivit själv. Vi delar in digagrammet i 3 delar: Den globala
 
 ## Det globala scopet.
 
-Konstanter och funktioner hör hemma i det globala scopet. Programmet blir onödigt
-svårläst om varje funktion behövde ta in konstanter och alla sina funktioner som parametrar. Därför existerar ett globalt scope.
-Den första låda vi ritar representerar det globala scopet. Det globala scopet innehåller alla namn som är tillgängliga överallt i programmet. Om du skapar en variabel utanför funktioner, klasser och metoder så hamnar den här.
-Tyvärr är det globala scopet överanvänt, särskilt i grundkurser. Om alla variabler i ett program är globala så blir programmet mindre överblickbart och svårare att dela upp i små, automatiskt testbara delar. Det är därför projektet har som krav att inte ha några globala variabler.
+Konstanter hör hemma i den globala lådan. Programmet blir onödigt
+svårläst om varje funktion behövde ta in konstanter och alla sina funktioner som parametrar. Därför existerar en global låda.
+Det är den första vi ritar och den innehåller alla namn som är tillgängliga överallt i programmet. Om du skapar en variabel utanför funktioner, klasser och metoder så hamnar den här.
+Tyvärr är den överanvänd, särskilt i grundkurser. Om alla variabler i ett program är globala så blir programmet mindre överblickbart och svårare att dela upp i små, automatiskt testbara delar. Det är därför projektet har som krav att inte ha några globala variabler.
 
 ### Globalt men inte i diagrammet
 I minnet finns några saker som vi inte har med i låd- och pildiagrammet:
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 [Facit](stackfacit.md)
 
 Om du anropar en metod på en klass så läggs metodanropet på stacken, precis som med funktioner. Self pekar på objektet vars metod har anropats. Exempelkod följer. Rita ett diagram då programmet når den kommenterade raden.
-```
+```python
 class A:
     def __init__(self):
         self.count = 0
