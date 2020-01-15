@@ -86,6 +86,31 @@ if __name__ == '__main__':
 ```
 [Facit](objektfacit.md)
 
+Exempelfråga:
+Rita ett låd- och pildiagram då koden nedan når den kommenterade raden:
+```python
+left = 1000
+right = 2000
+middle = left
+# Den kommenterade raden
+right = left
+left = middle
+```
+[Facit](middlefacit.md)
+
+Kuggfråga:
+Rita låd- och pildiagram då programmet når den kommenterade raden.
+
+```python
+def f(n):
+    v = []
+    v.append(n)
+
+
+# Den kommenterade raden
+```
+[Facit](kuggfraga.md)
+
 ## Datatyper
 
 Datatyper används för att beskriva vilken typ av data som lagras och hur objekt av denna
