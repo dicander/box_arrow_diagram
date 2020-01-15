@@ -2,7 +2,7 @@
 
 Syftet med ett låd- och pildiagram är att förstå kopplingen mellan variablers
 namn, typer och värden i datorns minne. Mer specifikt handlar det om de variabler som du skapar själv under programmets gång och deras resa genom funktioner och
-metoder som du har skrivit själv. Vi delar in digagrammet i 3 delar: Den globala
+metoder som du har skrivit själv. Vi delar in digagrammet i 3 delar: Den globala lådan, stacken och den tredje delen (som ibland kallas heapen.) På den tredje delen ligger alla objekt som pekas ut av namn samt objekt som pekas ut av andra objekt.
 
 ## Det globala scopet.
 
