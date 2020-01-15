@@ -2,7 +2,7 @@
 
 Syftet med ett låd- och pildiagram är att förstå kopplingen mellan variablers
 namn, typer och värden i datorns minne. Mer specifikt handlar det om de variabler som du skapar själv under programmets gång och deras resa genom funktioner och
-metoder som du har skrivit själv.
+metoder som du har skrivit själv. Vi delar in digagrammet i 3 delar som alla får varsitt stycke.
 
 ## Det globala scopet.
 
@@ -12,12 +12,18 @@ Den första låda vi ritar representerar det globala scopet. Det globala scopet 
 Tyvärr är det globala scopet överanvänt, särskilt i grundkurser. Om alla variabler i ett program är globala så blir programmet mindre överblickbart och svårare att dela upp i små, automatiskt testbara delar. Det är därför projektet har som krav att inte ha några globala variabler.
 
 ### Globalt men inte i diagrammet
+I minnet finns några saker som vi inte har med i låd- och pildiagrammet:
 
-När du startar ett Pythonprogram så finns redan ett antal variabler i minnet. Exempelvis är konstanten ```__name__``` satt till ```'__main__'``` om programmet körs
-som ett script. Dessutom finns Pythons inbyggda funktioner här så att de kan anropas. Det är fel att rita ut dessa i era låd- och pildiagram eftersom de
+* När du startar ett Pythonprogram så finns redan ett antal variabler i minnet. Exempelvis är konstanten ```__name__``` satt till ```'__main__'``` om programmet körs
+som ett script.
+* Pythons inbyggda funktioner som abs eller print ligger globalt.
+* Funktioner som du definierar i koden ligger globalt.
+* Klasser som int, float och list har ett objekt som representerar själva klassen och alla objekt av denna typ pekar på det.
+
+Det är fel att rita ut dessa i era låd- och pildiagram eftersom de
 begraver den fakta vi faktiskt söker: förhållandet mellan de namn som ditt
-program skapat och dess värden. Låd- och pildiagram är med andra ord en abstrakt
-representation av datorns minne.
+program skapat och dess värden. Ovanstående fakta abstraheras bort. Om du ritar med något av ovanstående så kommer diagrammet att vara på fel abstraktionsnivå.
+
 
 ## Det lokala scopet - en stackframe
 
@@ -80,7 +86,6 @@ if __name__ == '__main__':
 ```
 [Facit](objektfacit.md)
 
-
 ## Datatyper
 
 Datatyper används för att beskriva vilken typ av data som lagras och hur objekt av denna
@@ -139,7 +144,7 @@ en variabel förändras via en variabel men att förändringen syns av en annan
 variabel.
 
 Exempel där detta används internt av Python syns här:
-```
+```python
 >>> import random
 >>> v = [1, 2, 3, 4, 5]
 >>> random.shuffle(v)
@@ -152,7 +157,7 @@ som kastade om värdena direkt i listan (in place).
 
 Ett exempel på motsatsen är pythons inbyggda funktion sorted som returnerar
 en grund kopia av en sorterad lista:
-```
+```python
 >>> v = [1000, 4000, 2000, 3000, 5000, 7000, 6000]
 >>> fixed = sorted(v)
 >>> fixed
@@ -163,7 +168,7 @@ en grund kopia av en sorterad lista:
 ```
 
 Särskilt klurigt blir det när egna funktionsanrop använder ett helt annat parameternamn men ändå förändrar listan:
-```
+```python
 import random
 
 
@@ -180,7 +185,7 @@ f(v)
 print("after", v)
 ```
 Om vi kör detta kodexempel så är ett möjligt resultat:
-```
+```python
 $ python3 aliasing.py
 before ['1000', '2000', '3000', '4000', '5000']
 1000
@@ -195,7 +200,7 @@ $
 ### Tentatal från 2018
 
 Vad skriver följande Python3-program ut?
-```
+```python
 def mystery(v, n):
     n = n + 1
     v[1] = n
@@ -221,14 +226,14 @@ när ett objekt inte behövs i minnet längre. Vi gör referensräkning genom at
 
 ## Exempel på tentatal
 Rita en minnesbild med låd- och pildiagram för programmet nedan då det når denkommenterade raden.
-```
+```python
 left = 1000
 right = left
 # Den kommenterade raden
 ```
 
 Inspirerat av ett tentatal: Rita låd- och pil-diagram för hur det kan se ut i minnet då programmet når sista raden i main-funktionen.
-```
+```python
 class Node:
     def __init__(self, value, following):
         self.value = value
