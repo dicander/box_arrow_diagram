@@ -111,6 +111,19 @@ def f(n):
 ```
 [Facit](kuggfraga.md)
 
+Rita ett låd- och pildiagram då programmet når den kommenterade raden _för andra gången_:
+```python
+def f(n):
+    v = []
+    v.append(n)
+    # Den kommenterade raden
+    return
+
+
+f(1)
+f(2)
+```
+[Facit](andragangen.md)
 ## Datatyper
 
 Datatyper används för att beskriva vilken typ av data som lagras och hur objekt av denna
