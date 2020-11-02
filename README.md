@@ -27,15 +27,26 @@ program skapat och dess värden. Ovanstående fakta abstraheras bort. Om du rita
 
 ## Det lokala scopet - en stackframe
 
-När det procedurella paradigmet föddes så förde det med sig idén om ett lokalt scope. Istället för att ha ett stort blåvalsprogram med mängder av kod och variabler så delar vi in koden i lagom stora funktioner med få, överblickbara
-variabler. Varje gång en funktion anropas så skapas en ny låda som kallas
+Varje gång en funktion anropas så skapas en ny låda som kallas
 en stackframe. Stackframen är scope för alla parameternamn och lokala variabelnamn. För att skilja dessa lokala scope åt så märker man dem med funktionsanropets plats i koden. Det lokala scopet innehåller parameternamn och namn på lokala variabler som är bundna till värden i datorns minne.
 
 Observera att det är en stackframe per anrop och inte per funktion.
 
 Om det utförs ett funktionsanrop inifrån ett funktionsanrop så staplas alla
 stackframes ovanpå varandra i en stack (ordet stack används nu i sin engelska
-betydelse som är "stapel".)
+betydelse som är "stapel".) Stacken ritas vanligtvis uppe till vänster
+i diagrammet. Lämna lite utrymme mellan den globala lådan (som ligger
+  nere till vänter) och Stacken. Ordningen som anropen skett i utläses
+  genom att följa stapeln av stackframes uppåt vid nya anrop och nedåt
+  då funktionsanropen avslutas.
+
+När en funktion returnerar (uttryckligen genom return eller genom att ha
+kört all kod som ingår i funktionen) så tas anropets stackframe bort
+från diagrammet. (Överkurs: Ofta lever den kvar i minnet som en Zombieframe, men det är inget som vi visar i diagrammet.)
+Fråga: Om vi tar bort den efter anropet, kan vi då skippa att rita ut
+den om raden med kommentar nås efter att anropet har slutförts?
+Svar: Tekniskt sett ja, men tänk på att det kan ha skapats objekt i minnet som lever kvar eller ska skräpsamlas och dessa behöver vara med
+i diagrammet.
 
 Exempelkod:
 Rita låd- och pildiagram när körningen når den sista printsatsen i varje funktion. Rita också ett diagram då vi har lämnat main på slutet.
@@ -319,6 +330,28 @@ if __name__ == '__main__':
 ```
 
 [Facit](facit.md)
+
+
+# Pythons vanligaste datatyper:
+För att rita ett korrekt diagram behöver vi hålla koll på de vanligaste
+datatyperna i Python. Dessa delas in i oföränderliga (immutable) och
+föränderliga (mutable). Att en datatyp kan förändras betyder dock
+inte att den alltid gör det, vilket innebär att om vi vill göra rätt
+i diagrammet så behöver vi veta mer om typen än hur den är klassificerad.
+## Oföränderliga datatyper (immutable data types)
+Alla datatyper som kan skapas från en literal i Python är immutable, till exempel: int, float, complex, str, NoneType och bool. Detta innebär att det inte går att ändra ett sådant objekt. Om du gör en operation som + på en int eller en sträng så kommer det antingen att skapas ett nytt objekt (som när du adderar två långa strängar) eller pekas ut ett objekt som redan låg i minnet (som när du adderar två int:ar och får ett tal mellan -5 och +256).
+## Återanvändbara objekt
+Det finns bara ett objekt av datatypen NoneType, nämligen None. Datatypen bool har två objekt, True och False. Alla int:s mellan -5 och +256 återanvänds. Alla variabler med värdet None pekar på samma värde och
+därför kan de jämföras med ```is``` istället för ```=```.
+## Förändringsbara datatyper (mutable data types)
+Datatypen list och de flesta klasser som definieras i kodexempel i kursen
+är förändringsbara. Det innebär att det utpekade objektet kan förändras
+under programmets körning.
+# Sammanfattning
+Låd- och pildiagram täcker förhållandet mellan namn, datatyper och värden. De illustrerar koncept som scope, aliasing, garbage collection
+och mutability.
+
+
 
 1. Fler exempel finns i [exempeltentan](https://github.com/dicander/training_exam).
 2. Den [första tentan på det nya formatet](https://gits-15.sys.kth.se/dicander/gruprog_tenta_2019-10-18)
