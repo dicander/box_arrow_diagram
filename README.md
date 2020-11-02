@@ -346,7 +346,8 @@ därför kan de jämföras med ```is``` istället för ```=```.
 ## Förändringsbara datatyper (mutable data types)
 Datatypen list och de flesta klasser som definieras i kodexempel i kursen
 är förändringsbara. Det innebär att det utpekade objektet kan förändras
-under programmets körning.
+under programmets körning, men det garanterar inte att det gör det. Om du lägger ihop två listobjekt med ```v3 = v1 + v2``` så skapas ett nytt listobjekt. Om du däremot gör ```v.append(17)``` på en lista så förändras en befintlig lista. Det första är mer begripligt eftersom v1 och v2 behåller sina värden efter operationen. Det sista har bättre prestanda eftersom vi inte behöver kopiera hela listobjektet för att
+lägga till ett värde i slutet (Överkurs: I vissa lägen kommer append att bli långsamt eftersom det reserverade utrymmet i listan kan ta slut. Då kopieras hela listan (men inte resten av objektet) över till en ny lista som är dubbelt så stor, men detta sker exponentiellt sällan).
 # Sammanfattning
 Låd- och pildiagram täcker förhållandet mellan namn, datatyper och värden. De illustrerar koncept som scope, aliasing, garbage collection
 och mutability.
