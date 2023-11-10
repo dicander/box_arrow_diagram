@@ -2,7 +2,45 @@
 
 Syftet med ett låd- och pildiagram är att förstå kopplingen mellan variablers
 namn, typer och värden i datorns minne. Mer specifikt handlar det om de variabler som du skapar själv under programmets gång och deras resa genom funktioner och
-metoder som du har skrivit själv. Vi delar in diagrammet i 3 delar: Den globala lådan, stacken och den tredje delen (som ibland kallas heapen). På den tredje delen ligger alla objekt som pekas ut av namn samt objekt som pekas ut av andra objekt.
+metoder som du har skrivit själv. Vi delar in diagrammet i 3 delar: Den globala lådan ligger nere till vänster i diagrammet, stacken ligger ovanför den globala lådan, men också till vänster och den tredje delen: heapen ligger till höger. Heapen är lagringsplatsen för Pythons objekt. Mycket mer om dessa senare i dokumentet. Vi börjar med instruktionerna som delas ut på kontrollskrivningen och fyller sedan i med mer detaljer och konkreta exempel under.
+
+## Instruktionerna som delas ut på kontrollskrivningen liknar dessa:
+På var och en av nedanstående uppgifter behöver du rita en bild över minnet vid en viss
+position under programmets körning. Du behöver ha med:
+1. En låda för globala variablerna längst ner till vänster i diagrammet.
+2. En stackpost (Engelska: stack frame) per aktivt funktions-/metodanrop staplade i en
+stack. I stackpostens övre vänstra hörn ska det stå vilken funktion som har anropats
+följt av ett kolon och raden som funktionsanropet skedde på. Stacken växer uppåt så det
+senaste oavslutade funktions- eller metodanropet ska stå överst. Om det är en metod som
+har anropats, kom ihåg parametern self som ska peka ut objektet som metoden opererar
+på. Observera att stacken innehåller en stackpost per anrop och inte en stackpost per
+funktion. Skillanden märks särskilt vid rekursiva anrop.
+3. Ta bort stackposter från avslutade funktions-/metodanrop och uppdatera referensräknin-
+gen för eventuella objekt som pekats ut av deras lokala variabler och parametrar.
+4. Se till att pilarna har spetsar och inte bara är streck. Pilarna utgår från variabler,
+attribut, parametrar, listindex eller dictionary-nycklar och spetsen pekar alltid på ett objekt på
+heapen. Om pilarnas linjer behöver korsa varandra, gör en broliknande böj. Det blir
+lättare att felsöka och rätta diagrammen med så få korsande linjer som möjligt.
+5. Den tredje typen av låda i ett låd- och pildiagram förutom stackposter och den globala
+lådan är objekten på heapen. Överst i dessa lådor skriver vi objektets typ med en
+heldragen linje under. Om objektet endast har ett värde så skrivs detta värde under
+strecket i objektet. Om objektet däremot har attribut eller nycklar så ritas dessa som
+små lådor med namnet inuti lådan och pilar som utgår från dessa lådor visar bindningen
+till ett annat objekt. Om objektet har listindex så skrivs indexen bredvid de små lådorna.
+6. För vissa objekt mäter vi referensräkning. Exempel inkluderar men är inte begränsade
+till: listor, objekt av klasser som definierats i koden samt heltal större än 256 eller mindre
+än -5. Vi mäter inte referensräkning på heltal n där −5 ≤ n ≤ 256 samt objekten None,
+True och False. Referensräkningen mäter antalet pilar som pekar ut objektet. För att
+vara mer noggrann så räknas endast de pilar som har sin utgångspunkt från den globala
+lådan, stackposter för funktioner/metoder som inte har returnerat ännu och objekt som
+har referensräkning större än 0. Referensräkningen skriver vi i en liten låda längst ner
+till höger på relevanta objekt.
+7. Ta med alla referensräknade objekt som har varit bundna till variabler, parametrar, attribut, nycklar eller listindex under programmets körning. Om det är möjligt att skräpsamlaren (the garbage
+colllector) har tagit bort ett objekt, låt det stå kvar men rita en pil från skräpsamlaren
+till objektet som ska tas bort och uppdatera referensräkningen för övriga objekt som
+pekas ut av pilar från objekt med referensräkning 0.
+
+
 
 ## Det globala scopet.
 
