@@ -342,7 +342,7 @@ i diagrammet så behöver vi veta mer om typen än hur den är klassificerad.
 Alla datatyper som kan skapas från en literal i Python är immutable, till exempel: int, float, complex, str, NoneType och bool. Detta innebär att det inte går att ändra ett sådant objekt. Om du gör en operation som + på en int eller en sträng så kommer det antingen att skapas ett nytt objekt (som när du adderar två långa strängar) eller pekas ut ett objekt som redan låg i minnet (som när du adderar två int:ar och får ett tal mellan -5 och +256).
 ## Återanvändbara objekt
 Det finns bara ett objekt av datatypen NoneType, nämligen None. Datatypen bool har två objekt, True och False. Alla int:s mellan -5 och +256 återanvänds. Alla variabler med värdet None pekar på samma värde och
-därför kan de jämföras med ```is``` istället för ```=```.
+därför kan de jämföras med ```is``` istället för ```==```.
 ## Förändringsbara datatyper (mutable data types)
 Datatypen list och de flesta klasser som definieras i kodexempel i kursen
 är förändringsbara. Det innebär att det utpekade objektet kan förändras
