@@ -2,7 +2,16 @@
 
 Syftet med ett låd- och pildiagram är att förstå kopplingen mellan variablers
 namn, typer och värden i datorns minne. Mer specifikt handlar det om de variabler som du skapar själv under programmets gång och deras resa genom funktioner och
-metoder som du har skrivit själv. Vi delar in diagrammet i 3 delar: Den globala lådan ligger nere till vänster i diagrammet, stacken ligger ovanför den globala lådan, men också till vänster och den tredje delen: heapen ligger till höger. Heapen är lagringsplatsen för Pythons objekt. Mycket mer om dessa senare i dokumentet. Vi börjar med instruktionerna som delas ut på kontrollskrivningen och fyller sedan i med mer detaljer och konkreta exempel under.
+metoder som du har skrivit själv.
+
+## Varför låd- och pildiagram?
+
+Kurens främsta syfte med låd- och pildiagram är till för att se till att programmet gör rätt. Programmerare som missförstår variabler och referenser kan tappa information eller förändra fel objekt vilket leder till att programmet gör rätt. Eftersom det är en grundkurs så lägger den också grunden för att förstå mer avancerade koncept som hur man programmerar multitrådade program och mer avancerade datastrukturer än grundkursens listor, dictionaries, mängder och tupler.
+
+## Diagrammets tre delar
+
+Vi delar in diagrammet i 3 delar: Den globala lådan ligger nere till vänster i diagrammet, stacken ligger ovanför den globala lådan, men också till vänster och den tredje delen: heapen ligger till höger. Heapen är lagringsplatsen för Pythons objekt.
+
 
 ## Instruktionerna som delas ut på kontrollskrivningen liknar dessa:
 På var och en av nedanstående uppgifter behöver du rita en bild över minnet vid en viss
@@ -42,11 +51,12 @@ pekas ut av pilar från objekt med referensräkning 0.
 
 
 
-## Det globala scopet.
+## Den globala lådan.
 
+Nere till vänster i digrammet ligger den globala lådan. Den ritas som en fyrkantig låda där det uppe till vänster står "global" utan citattecken.
 Konstanter hör hemma i den globala lådan. Programmet blir onödigt
-svårläst om varje funktion behövde ta in konstanter och alla sina funktioner som parametrar. Därför existerar en global låda.
-Det är den första vi ritar och den innehåller alla namn som är tillgängliga överallt i programmet. Om du skapar en variabel utanför funktioner, klasser och metoder så hamnar den här.
+svårläst om varje funktion behövde ta in konstanter som parametrar. Därför existerar en global låda.
+Det är den första vi ritar och den innehåller alla namn som är tillgängliga överallt i programmet. Om du skapar en variabel utanför funktioner och klasser så hamnar den här.
 Tyvärr är den överanvänd, särskilt i grundkurser. Om alla variabler i ett program är globala så blir programmet mindre överblickbart och svårare att dela upp i små, automatiskt testbara delar. Det är därför projektet har som krav att inte ha några globala variabler.
 
 ### Globalt men inte i diagrammet
@@ -63,12 +73,17 @@ begraver den fakta vi faktiskt söker: förhållandet mellan de namn som ditt
 program skapat och dess värden. Ovanstående fakta abstraheras bort. Om du ritar med något av ovanstående så kommer diagrammet att vara på fel abstraktionsnivå.
 
 
-## Det lokala scopet - en stackframe
+## Stacken
+
+Stacken ritas uppe till vänster i låd- och pildiagram. Den ansvarar för vart programmet återvänder när en funktion eller metod returnerar, samt för att hålla reda på vilka parametrar och lokala variabler som är aktiva. Stacken växer uppåt och den senaste stackposten ligger överst. Stackposten innehåller namnet på funktionen/metoden som anropats, raden som anropet skedde på samt parametrar och lokala variabler. Om det är en metod som anropats så behöver vi också ha med parametern self som pekar ut objektet som metoden opererar på.
+
+
+### Det lokala scopet - en stackframe
 
 Varje gång en funktion anropas så skapas en ny låda som kallas
 en stackframe. Stackframen är scope för alla parameternamn och lokala variabelnamn. För att skilja dessa lokala scope åt så märker man dem med funktionsanropets plats i koden. Det lokala scopet innehåller parameternamn och namn på lokala variabler som är bundna till värden i datorns minne.
 
-Observera att det är en stackframe per anrop och inte per funktion.
+Observera att det är en stackframe per anrop och inte per funktion. Särskilt i rekursiva funktioner (funktioner som anropar sig själva) så innebär det att stacken kan innebära att samma funktion finns på flera ställen i stacken samtidigt. Detta är helt normalt och det är därför vi skriver ut raden som anropet skedde på i stackposten.
 
 Om det utförs ett funktionsanrop inifrån ett funktionsanrop så staplas alla
 stackframes ovanpå varandra i en stack (ordet stack används nu i sin engelska
@@ -173,6 +188,11 @@ f(1)
 f(2)
 ```
 [Facit](andragangen.md)
+
+### Stacken överkurs
+
+I fortsättningskursen och i P-uppgifter för betyg A kommer ni att möta program med flera trådar. Varje tråd har då en egen stack och variabler från olika trådar kan vara bundna till samma objekt på heapen. Om dessa objekt är förändringsbara (som datatypen list) så behöver förändringarna synkroniseras. Ett annat alternativ är att man ser till att alla delade variabler är oföränderliga (som datatypen tuple). Båda lösningarna har olika för och nackdelar ur prestanda- och begriplighetssynpunkt. På kontrollskrivningen i grundkursen kan ni dock lita på att det bara blir en stack per diagram.
+
 ## Datatyper
 
 Datatyper används för att beskriva vilken typ av data som lagras och hur objekt av denna
@@ -223,12 +243,7 @@ Fler exempel finns på [Pythons hemsida](https://docs.python.org/3/tutorial/data
 
 ## Aliasing
 
-Program behöver hög prestanda och de behöver vara begripliga så att de är lätta att förstå och felsöka. Python låter ibland bli att kopiera objekt där programmerare skulle förvänta sig en kopia. Det gäller även
-förändringsbara objekt. Den prestandaökningen
-sker på bekostnad av begripligheten eftersom vi ofta hamnar i situationer där
-flera namn pekar på samma förändringsbara objekt och det kan leda till att
-en variabel förändras via en variabel men att förändringen syns av en annan
-variabel.
+Aliasing definieras som att ett objekt kan nås på flera olika sätt. Exempevis genom olika variabelnamn, parameternamn, index, attribut, nycklar. Om objektet är oföränderligt (immutable) så är detta endast en optimering som sparar minne, men om objektet är föränderligt (mutable) så kan detta leda till mer svårbegripliga beteenden som att ett objekt förändrats via ett helt annat namn, eventuellt inne i en helt annan funktion.
 
 Exempel där detta används internt av Python syns här:
 ```python
@@ -308,13 +323,17 @@ Tillägg från tentan: Rita ett låd- och pildiagram för hur det ser ut innan m
 Ett annat namn för aliasing är sharing.
 
 
+### Aliasing, vanliga missförstånd
+
+Aliasing brukar oftast förenklas till att säga att ordet kommer från alias, dvs annat namn men det är en förenkling. Att två variabler pekar på samma objekt är ett exempel på aliasing men inte en definition. Det finns flera andra sätt att skapa aliasing som inte involverar variabler. Exempelvis kan vi skapa aliasing genom att använda index på en lista eller nycklar på en dictionary. Vi kan också skapa aliasing genom att använda attribut på ett objekt. Detta är viktigt att förstå eftersom det är en vanlig missuppfattning att aliasing endast handlar om variabler.
+
 ## Referensräkning
 
 Varje objekt i Python har en referensräkning som anger hur många andra lådor
 i diagrammet som pekar på det. Referensräkningen används för att avgöra
 när ett objekt inte behövs i minnet längre. Vi gör referensräkning genom att skriva ett tal nere i högra hörnet på varje objekt som ligger utanför stacken.
 
-## Exempel på tentatal
+### Exempel på tentatal
 Rita en minnesbild med låd- och pildiagram för programmet nedan då det når denkommenterade raden.
 ```python
 left = 1000
