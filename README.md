@@ -6,7 +6,7 @@ metoder som du har skrivit själv.
 
 ## Varför låd- och pildiagram?
 
-Kurens främsta syfte med låd- och pildiagram är till för att se till att programmet gör rätt. Programmerare som missförstår variabler och referenser kan tappa information eller förändra fel objekt vilket leder till att programmet gör rätt. Eftersom det är en grundkurs så lägger den också grunden för att förstå mer avancerade koncept som hur man programmerar multitrådade program och mer avancerade datastrukturer än grundkursens listor, dictionaries, mängder och tupler.
+Kurens främsta syfte med låd- och pildiagram är till för att se till att programmet gör rätt. Programmerare som missförstår variabler och referenser kan tappa information eller förändra fel objekt vilket leder till att programmet gör rätt. Eftersom det är en grundkurs så lägger den också grunden för att förstå mer avancerade koncept som hur man programmerar högpresterande program.
 
 ## Diagrammets tre delar
 
