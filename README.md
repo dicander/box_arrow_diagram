@@ -6,7 +6,7 @@ metoder som du har skrivit själv.
 
 ## Varför låd- och pildiagram?
 
-Kurens främsta syfte med låd- och pildiagram är till för att se till att programmet gör rätt. Programmerare som missförstår variabler och referenser kan tappa information eller förändra fel objekt vilket leder till att programmet gör rätt. Eftersom det är en grundkurs så lägger den också grunden för att förstå mer avancerade koncept som hur man programmerar högpresterande program.
+Kursens främsta syfte med låd- och pildiagram är till för att se till att programmet gör rätt. Programmerare som missförstår variabler och referenser kan tappa information eller förändra fel objekt vilket leder till att programmet gör rätt. Eftersom det är en grundkurs så lägger den också grunden för att förstå mer avancerade koncept som hur man programmerar högpresterande program.
 
 ## Diagrammets tre delar
 
@@ -329,11 +329,18 @@ Aliasing brukar oftast förenklas till att säga att ordet kommer från alias, d
 
 ## Referensräkning
 
-Varje objekt i Python har en referensräkning som anger hur många andra lådor
-i diagrammet som pekar på det. Referensräkningen används för att avgöra
-när ett objekt inte behövs i minnet längre. Vi gör referensräkning genom att skriva ett tal nere i högra hörnet på varje objekt som ligger utanför stacken.
+Varje objekt har en referensräkning som används för att avgöra
+när ett objekt inte behövs i minnet längre. Vi gör referensräkning genom att skriva ett tal nere i högra hörnet på varje objekt som ligger utanför stacken. När denna räkning går ner till 0 så tas objektet bort av den referensräknade skräpsamlaren. Denna operation sker inte garanterat omedelbart i verkligheten, men vi behöver ha något rätt och fel i våra diagram, så på den här delen av kontrollskrivningen går det bra att anta att det sker omedelbart. Detta innebär att för att få rätt referensräkning i låd- och pildiagrammet så behöver du kolla rekursivt om ett objekt faktist är utpekat av något objekt som har referensräkning större än 0 eller inte. 
+Vi ritar inte ut referensräkningen på objekt som Python ständigt håller i minnet, såsom heltal mellan -5 och +256, objekten None, True och False samt klasser som definierats i koden. Det beror på att referensräkningen här beror på många andra faktorer än koden vi studerar.
 
-### Exempel på tentatal
+
+### Tips för att undvika vanliga missförstånd om referensräkning.
+
+1. Bortplockade stackposter: När en funktion returneras så kommer parametrarna och variablerna inte längre att bidra till referensräkning hos objekten på heapen.
+2. Potentiellt bortplockade objekt på heapen: Ett objekt som kan ha garbagecollectats vid punkten då diagrammet ritades behöver vara med i diagrammet men med referensräkning 0. Om detta objekt pekar ut andra objekt så ska de nollade objekten inte bidra till referensräkning för andra objekt heller. Detta innebär att ni behöver kolla diagrammet rekursivt efter nollade objekt för att få rätt referensräkning. Det räcker inte med att räkna alla pilar in till ett objekt.
+
+
+### Uppgifter på referensräkning.
 Rita en minnesbild med låd- och pildiagram för programmet nedan då det når denkommenterade raden.
 ```python
 left = 1000
